@@ -2,17 +2,18 @@ import ee
 
 class SpatialProcessor:
     def __init__(self):
-        """initialise la connexion à google earth engine"""
-        ee.Initialize(project="training-462609")
+        """Initialise la connexion à Earth Engine"""
+        ee.Initialize(project='habitat-du-macaque-de-barbarie')
 
     def get_satellite_image(self, lat, lon):
-        """recupere la dernière image sentinel pour un point"""
+        """Récupère la dernière image Sentinel-2 pour un point donné"""
         point = ee.Geometry.Point([lon, lat])
-
-        image = (
-            ee.ImageCollection('COPERNICUS/S2_SR')
-            .filterBounds(point)
-            .sort('CLOUDY_PIXEL_PERCENTAGE')
-            .first()
-        )
+       
+        # On cherche l'image la plus récente et la moins nuageuse
+        image = (ee.ImageCollection('COPERNICUS/S2_SR')
+                 .filterBounds(point)
+                 .sort('CLOUDY_PIXEL_PERCENTAGE')
+                 .first())
+       
         return image
+    

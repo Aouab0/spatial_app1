@@ -3,7 +3,7 @@ import ee
 class SpatialProcessor:
     def __init__(self):
         """Initialise la connexion à Earth Engine"""
-        ee.Initialize(project='habitat-du-macaque-de-barbarie')
+        ee.Initialize(project='training-462609')
 
     def get_satellite_image(self, lat, lon):
         """Récupère la dernière image Sentinel-2 pour un point donné"""
